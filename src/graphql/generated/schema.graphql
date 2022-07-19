@@ -1,0 +1,63 @@
+type Query {
+  """Get all accounts query"""
+  transactions: [Account]
+
+  """Get all accounts query"""
+  accounts: [Account]
+}
+
+"""An account"""
+type Account {
+  """id of the account"""
+  accountId: ID!
+
+  """accounts username"""
+  username: String
+
+  """list of transactions"""
+  transactions: [Transaction]
+}
+
+"""A transaction"""
+type Transaction {
+  """transaction id"""
+  transactionId: ID!
+
+  """transaction category"""
+  category: String
+
+  """transaction date"""
+  date: String
+
+  """transaction account"""
+  account: Account
+
+  """Account id"""
+  accountId: Int
+}
+
+type Mutation {
+  """Create Transaction"""
+  createTransaction(input: CreateTransactionInput): Transaction
+
+  """create Account"""
+  createAccount(input: CreateAccountInput): Account
+}
+
+"""Create transaction input"""
+input CreateTransactionInput {
+  """The category."""
+  category: String!
+
+  """The date."""
+  date: String!
+
+  """The accounts ID."""
+  accountId: Int!
+}
+
+"""Create account input"""
+input CreateAccountInput {
+  """Account username"""
+  username: String!
+}
