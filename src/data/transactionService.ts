@@ -7,11 +7,12 @@ export const getAllTransactions = async (): Promise<Transaction[]> => {
 };
 
 export const getTransactionById = async (transactionId: number): Promise<Transaction | null> => {
-  return prismaContext.prisma.transaction.findFirst({
+  const transaction = await prismaContext.prisma.transaction.findUnique({
     where: {
       transactionId,
     },
-  });
+  })
+  return transaction;
 };
 
 export const getTransactionsByAccount = async (accountId: number): Promise<Transaction[]> => {
@@ -22,13 +23,22 @@ export const getTransactionsByAccount = async (accountId: number): Promise<Trans
   });
 };
 
+export const deleteTransaction = async (transactionId: number): Promise<Transaction> => {
+  const transaction = await prismaContext.prisma.transaction.delete({
+    where: {
+      transactionId,
+    },
+  });
+  return transaction;
+};
+
 export const createTransaction = async (
   category: string,
   date: string,
   accountId: number
 ): Promise<Transaction> => {
-  const book = await prismaContext.prisma.transaction.create({
+  const transaction = await prismaContext.prisma.transaction.create({
     data: { category, date, accountId },
   });
-  return book;
+  return transaction;
 };

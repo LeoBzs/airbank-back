@@ -1,21 +1,15 @@
 type Query {
-  """Get all accounts query"""
-  transactions: [Account]
+  """Get all transactions query"""
+  transactions: [Transaction]
+
+  """Get Transaction by Account"""
+  transactionsByAccount(input: GetTransactionInput): [Transaction]
+
+  """Get transaction by id query"""
+  transactionById(input: GetTransactionByIdInput): Transaction
 
   """Get all accounts query"""
   accounts: [Account]
-}
-
-"""An account"""
-type Account {
-  """id of the account"""
-  accountId: ID!
-
-  """accounts username"""
-  username: String
-
-  """list of transactions"""
-  transactions: [Transaction]
 }
 
 """A transaction"""
@@ -36,12 +30,45 @@ type Transaction {
   accountId: Int
 }
 
+"""An account"""
+type Account {
+  """id of the account"""
+  accountId: ID!
+
+  """accounts username"""
+  username: String
+
+  """list of transactions"""
+  transactions: [Transaction]
+}
+
+"""get transaction input"""
+input GetTransactionInput {
+  """ID."""
+  accountId: Int!
+}
+
+"""get transaction input"""
+input GetTransactionByIdInput {
+  """Selected transaction details."""
+  transactionId: Int!
+}
+
 type Mutation {
   """Create Transaction"""
   createTransaction(input: CreateTransactionInput): Transaction
 
   """create Account"""
   createAccount(input: CreateAccountInput): Account
+
+  """delete Transaction"""
+  deleteTransaction(input: DeleteTransactionInput): Transaction
+
+  """getById Transaction mutation"""
+  getTransactionById(input: GetTransactionByIdInput): Transaction
+
+  """Get Transaction by Account"""
+  getTransactionsByAccount(input: GetTransactionInput): [Transaction]
 }
 
 """Create transaction input"""
@@ -60,4 +87,10 @@ input CreateTransactionInput {
 input CreateAccountInput {
   """Account username"""
   username: String!
+}
+
+"""Delete transaction input"""
+input DeleteTransactionInput {
+  """Transaction deletion."""
+  transactionId: Int!
 }

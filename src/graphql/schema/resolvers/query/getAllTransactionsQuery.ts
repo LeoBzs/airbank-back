@@ -1,8 +1,8 @@
 import { GraphQLFieldConfig, GraphQLFieldResolver, GraphQLList } from 'graphql';
 import { Transaction } from '@prisma/client';
-import { IApolloServerContext } from 'C:/Users/leonardo.rodrigues/Documents/Projects/airbank-back/src/lib/interfaces/IApolloServerContext'
-import { getAllTransactions } from 'C:/Users/leonardo.rodrigues/Documents/Projects/airbank-back/src/data/transactionService';
-import AccountType from 'C:/Users/leonardo.rodrigues/Documents/Projects/airbank-back/src/graphql/schema/typedefs/AccountType';
+import { IApolloServerContext } from '@src/lib/interfaces/IApolloServerContext'
+import { getAllTransactions } from '@src/data/transactionService';
+import TransactionType from '@src/graphql/schema/typedefs/TransactionType';
 
 export const getAllTransactionsQueryResolver: GraphQLFieldResolver<
   unknown,
@@ -12,10 +12,10 @@ export const getAllTransactionsQueryResolver: GraphQLFieldResolver<
   return transactions;
 };
 
-const getAllBooksQuery: GraphQLFieldConfig<unknown, IApolloServerContext> = {
-  description: 'Get all accounts query',
-  type: GraphQLList(AccountType),
+const getAllTransactionsQuery: GraphQLFieldConfig<unknown, IApolloServerContext> = {
+  description: 'Get all transactions query',
+  type: GraphQLList(TransactionType),
   resolve: getAllTransactionsQueryResolver,
 };
 
-export default getAllBooksQuery;
+export default getAllTransactionsQuery;
