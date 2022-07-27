@@ -2,6 +2,7 @@ import { getAllTransactionsQueryResolver } from './getAllTransactionsQuery';
 import { getAllAccountsResolver } from './getAllAccountsQuery';
 import { getTransactionsByAccountQueryResolver } from './getTransactionsByAccountQuery';
 import { getTransactionByIdQueryResolver } from './getTransactionByIdQuery';
+import { getTransactionsByCategoryQueryResolver } from './getTransactionsByCategoryQuery';
 
 const query = {
   transactions: {
@@ -10,9 +11,15 @@ const query = {
   accounts: {
     resolve: getAllAccountsResolver,
   },
-//  transactionByAccount: {  
-//    resolve: getTransactionsByAccountQueryResolver, 
-//  },
+  transactionsByAccount: {  
+    resolve: getTransactionsByAccountQueryResolver, 
+  },
+  transactionsByCategory: {  
+    resolve: getTransactionsByCategoryQueryResolver, 
+  },
+  transactionById: {  
+    resolve: getTransactionByIdQueryResolver, 
+  },
 };
 
 export default query;

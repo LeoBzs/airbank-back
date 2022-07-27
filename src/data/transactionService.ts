@@ -1,4 +1,4 @@
-import { Transaction } from '@prisma/client';
+import { Transaction, Account } from '@prisma/client';
 import prismaContext from '../lib/prisma/prismaContext';
 
 export const getAllTransactions = async (): Promise<Transaction[]> => {
@@ -19,6 +19,14 @@ export const getTransactionsByAccount = async (accountId: number): Promise<Trans
   return prismaContext.prisma.transaction.findMany({
     where: {
       accountId,
+    },
+  });
+};
+
+export const getTransactionsByCategory = async (category : string): Promise<Transaction[]> => {
+  return prismaContext.prisma.transaction.findMany({
+    where: {
+      category,
     },
   });
 };

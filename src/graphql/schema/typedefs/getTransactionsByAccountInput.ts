@@ -5,7 +5,7 @@ import {
   } from 'graphql';
   
   const getTransactionsByAccountInput: GraphQLInputObjectType = new GraphQLInputObjectType({
-    name: 'GetTransactionInput',
+    name: 'getTransactionsByAccountInput',
     description: 'get transaction input',
     fields: {
       accountId: {

@@ -3,10 +3,13 @@ type Query {
   transactions: [Transaction]
 
   """Get Transaction by Account"""
-  transactionsByAccount(input: GetTransactionInput): [Transaction]
+  transactionsByAccount(input: getTransactionsByAccountInput): [Transaction]
+
+  """Get transaction by Category"""
+  transactionsByCategory(input: getTransactionsByCategoryInput): [Transaction]
 
   """Get transaction by id query"""
-  transactionById(input: GetTransactionByIdInput): Transaction
+  transactionById(input: getTransactionByIdInput): Transaction
 
   """Get all accounts query"""
   accounts: [Account]
@@ -43,13 +46,19 @@ type Account {
 }
 
 """get transaction input"""
-input GetTransactionInput {
+input getTransactionsByAccountInput {
   """ID."""
   accountId: Int!
 }
 
+"""get transactions by category input"""
+input getTransactionsByCategoryInput {
+  """transaction fetched by category details."""
+  category: String!
+}
+
 """get transaction input"""
-input GetTransactionByIdInput {
+input getTransactionByIdInput {
   """Selected transaction details."""
   transactionId: Int!
 }
@@ -63,12 +72,6 @@ type Mutation {
 
   """delete Transaction"""
   deleteTransaction(input: DeleteTransactionInput): Transaction
-
-  """getById Transaction mutation"""
-  getTransactionById(input: GetTransactionByIdInput): Transaction
-
-  """Get Transaction by Account"""
-  getTransactionsByAccount(input: GetTransactionInput): [Transaction]
 }
 
 """Create transaction input"""
